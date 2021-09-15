@@ -21,7 +21,7 @@ Subword tokens: smart-er
 
 '''
 import nltk
-#nltk.download()
+nltk.download()
 
 # called as paragraph or corps
 
