@@ -1,29 +1,6 @@
-# https://www.analyticsvidhya.com/blog/2020/05/what-is-tokenization-nlp/#:~:text=Tokens%20are%20the%20building%20blocks,n%2Dgram%20characters)%20tokenization.
-''' Highlights
-Tokenization is a key (and mandatory) aspect of working with text data
-We’ll discuss the various nuances of tokenization, including how to handle Out-of-Vocabulary words (OOV)
-
- A Quick Rundown of Tokenization
-Tokenization is a common task in Natural Language Processing (NLP). It’s a fundamental step in both traditional NLP methods like Count Vectorizer and Advanced Deep Learning-based architectures like Transformers.
-
-Tokens are the building blocks of Natural Language.
-
-Tokenization is a way of separating a piece of text into smaller units called tokens. Here, tokens can be either words, characters, or subwords. Hence, tokenization can be broadly classified into 3 types – word, character, and subword (n-gram characters) tokenization.
-
-For example, consider the sentence: “Never give up”.
-
-The most common way of forming tokens is based on space. Assuming space as a delimiter, the tokenization of the sentence results in 3 tokens – Never-give-up. As each token is a word, it becomes an example of Word tokenization.
-
-Similarly, tokens can be either characters or subwords. For example, let us consider “smarter”:
-
-Character tokens: s-m-a-r-t-e-r
-Subword tokens: smart-er
-
-'''
 import nltk
-nltk.download()
-
-# called as paragraph or corps
+from nltk.stem import PorterStemmer
+from nltk.corpus import stopwords
 
 paragraph = """I have three visions for India. In 3000 years of our history, people from all over 
                the world have come and invaded us, captured our lands, conquered our minds. 
@@ -49,32 +26,14 @@ paragraph = """I have three visions for India. In 3000 years of our history, peo
                I was lucky to have worked with all three of them closely and consider this the great opportunity of my life. 
                I see four milestones in my career"""
 
-# Tokenizing sentences
+# sentence tokenization
 
-# converts paragraph into sentences.
 sentences = nltk.sent_tokenize(paragraph)
+stemmer = PorterStemmer()
+
+# Stemming
+for i in range(len(sentences)):
+    words = nltk.word_tokenize(sentences[i])
+    words = [stemmer.stem(word) for word in words if word not in set(stopwords.words('english'))]
+    sentences[i] = ' '.join(words)
 print(sentences)
-
-# Tokenizing words
-
-# can convert paragraph into words
-word = nltk.word_tokenize(paragraph)
-print(word)
-
-print("\n")
-print("*"*50)
-print("\n")
-
-# can convert sentences into words
-sentence_word=[]
-for sent in sentences:
-    sent_word = nltk.word_tokenize(sent)
-    print(sent_word)
-    for i in sent_word:
-        sentence_word.append(i)
-
-print("\n")
-print("*"*50)
-print("\n")
-
-print("output :-",sentence_word)
