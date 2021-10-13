@@ -5,7 +5,7 @@ weightage of the words or sentiment of the words are not considered, they all wi
 
 in NLP precessing we should know, which word is more important , sentiment of the sentence is required to get better outcome
 
-to solve this issue we can use TFIDF(Term frequency and inverse document frequency)
+to solve this issue we can use TFIDF(Term frequency and inverse document frequency).
 '''
 
 
